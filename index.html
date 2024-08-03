@@ -13,6 +13,9 @@
             background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
             text-align: center;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .container {
             max-width: 600px;
@@ -52,13 +55,31 @@
         .button:active {
             transform: scale(0.95);
         }
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 15px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: auto;
+        }
+        footer a {
+            color: #00c6ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Magic Craft SMP launcher</h1>
+        <h1>Welcome to Magic Craft SMP Launcher</h1>
         <p>Click the button below to launch Eaglercraft</p>
         <a href="client.html" class="button">Launch</a>
     </div>
+    <footer>
+        <p>&copy; 2024 Magic Craft SMP. All rights reserved. <a href="#">Privacy Policy</a></p>
+    </footer>
 </body>
 </html>
