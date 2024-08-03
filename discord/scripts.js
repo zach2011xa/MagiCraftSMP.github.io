@@ -17,8 +17,15 @@ document.getElementById('sendButton').addEventListener('click', function() {
         messageContainer.appendChild(usernameSpan);
         messageContainer.appendChild(messageSpan);
 
-        document.querySelector('.chat-messages').appendChild(messageContainer);
+        document.getElementById('chatMessages').appendChild(messageContainer);
         input.value = '';
-        document.querySelector('.chat-messages').scrollTop = document.querySelector('.chat-messages').scrollHeight;
+        document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    }
+});
+
+// Optional: Allow pressing Enter to send the message
+document.getElementById('messageInput').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById('sendButton').click();
     }
 });
