@@ -65,6 +65,7 @@
             height: 400px;
             overflow-y: auto;
             position: relative;
+            display: none; /* Initially hidden */
         }
         .chat-box {
             display: flex;
@@ -170,7 +171,7 @@
         <p>Click the button below to launch Eaglercraft</p>
         <a href="client.html" class="button">Launch</a>
     </div>
-    
+
     <div class="auth-form">
         <h2>Register / Login</h2>
         <form id="auth-form">
@@ -184,7 +185,7 @@
         <div class="chat-box">
             <div class="messages">
                 <div class="message bot">Welcome to the chat!</div>
-                <div class="message user">Hello, how are you?</div>
+                <!-- User messages will appear here -->
             </div>
             <div class="chat-input">
                 <input type="text" id="chat-message" placeholder="Type a message..." disabled>
@@ -198,10 +199,9 @@
     </footer>
 
     <script>
-        // Simple JavaScript to enable the chat interface after login
         document.getElementById('auth-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            // Simulate authentication
+            // Hide auth form and show chat container
             document.querySelector('.chat-container').style.display = 'block';
             document.querySelector('.auth-form').style.display = 'none';
             document.getElementById('chat-message').disabled = false;
