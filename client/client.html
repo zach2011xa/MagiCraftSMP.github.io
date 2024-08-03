@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat - Magic Craft SMP</title>
+    <title>Magic Craft SMP Launcher</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -19,7 +18,7 @@
         }
         .container {
             max-width: 800px;
-            margin: 50px auto;
+            margin: 100px auto;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
@@ -32,67 +31,28 @@
             color: #444;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        .chat-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            height: 400px;
-            overflow-y: auto;
-            position: relative;
-            display: none; /* Initially hidden */
+        p {
+            font-size: 1.2em;
+            color: #777;
+            margin-bottom: 30px;
         }
-        .chat-box {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .messages {
-            flex: 1;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            overflow-y: auto;
-        }
-        .message {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            background: #f1f1f1;
-        }
-        .message.user {
-            background: #e0ffe0;
-            text-align: right;
-        }
-        .message.bot {
-            background: #e0e0ff;
-        }
-        .chat-input {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-            background: #f9f9f9;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .chat-input button {
-            margin-left: 10px;
-            padding: 10px;
-            font-size: 16px;
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 18px;
             color: #fff;
             background: linear-gradient(90deg, #007bff, #00c6ff);
-            border: none;
+            text-decoration: none;
             border-radius: 8px;
-            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-        .chat-input button:hover {
+        .button:hover {
             background: linear-gradient(90deg, #0056b3, #00aaff);
+            transform: scale(1.05);
+        }
+        .button:active {
+            transform: scale(0.95);
         }
         footer {
             background: #333;
@@ -109,92 +69,17 @@
         footer a:hover {
             text-decoration: underline;
         }
-        .auth-form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .auth-form h2 {
-            margin-bottom: 20px;
-            color: #444;
-        }
-        .auth-form input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .auth-form button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            color: #fff;
-            background: linear-gradient(90deg, #007bff, #00c6ff);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .auth-form button:hover {
-            background: linear-gradient(90deg, #0056b3, #00aaff);
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Magic Craft SMP Chat</h1>
-        <div class="auth-form">
-            <h2>Register / Login</h2>
-            <form id="auth-form">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login / Register</button>
-            </form>
-        </div>
-
-        <div class="chat-container">
-            <div class="chat-box">
-                <div class="messages">
-                    <div class="message bot">Welcome to the chat!</div>
-                    <!-- User messages will appear here -->
-                </div>
-                <div class="chat-input">
-                    <input type="text" id="chat-message" placeholder="Type a message..." disabled>
-                    <button id="send-message" disabled>Send</button>
-                </div>
-            </div>
-        </div>
+        <h1>Welcome to Magic Craft SMP Launcher</h1>
+        <p>Click the button below to launch Eaglercraft</p>
+        <a href="client.html" class="button">Launch</a>
     </div>
 
     <footer>
         <p>&copy; 2020-2024 Magic Craft SMP. All rights reserved. <a href="#">Privacy Policy</a></p>
     </footer>
-
-    <script>
-        document.getElementById('auth-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Hide auth form and show chat container
-            document.querySelector('.chat-container').style.display = 'block';
-            document.querySelector('.auth-form').style.display = 'none';
-            document.getElementById('chat-message').disabled = false;
-            document.getElementById('send-message').disabled = false;
-        });
-
-        document.getElementById('send-message').addEventListener('click', function() {
-            const messageInput = document.getElementById('chat-message');
-            const messageText = messageInput.value.trim();
-            if (messageText) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', 'user');
-                messageElement.textContent = messageText;
-                document.querySelector('.messages').appendChild(messageElement);
-                messageInput.value = '';
-                document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight;
-            }
-        });
-    </script>
 </body>
 </html>
