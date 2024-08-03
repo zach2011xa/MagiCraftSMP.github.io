@@ -78,6 +78,15 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('IP Address copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -88,8 +97,8 @@
 
         <div class="info">
             <h2>Server IP Addresses</h2>
-            <p><strong>Eaglercraft IP:</strong> <a href="wss://afraid-robin-100.telebit.io/" target="_blank">wss://afraid-robin-100.telebit.io/</a></p>
-            <p><strong>Java IP:</strong> <a href="http://magazine-webcast.gl.joinmc.link" target="_blank">magazine-webcast.gl.joinmc.link</a></p>
+            <p><strong>Eaglercraft IP:</strong> <a href="javascript:void(0);" onclick="copyToClipboard('wss://afraid-robin-100.telebit.io/')">wss://afraid-robin-100.telebit.io/</a></p>
+            <p><strong>Java IP:</strong> <a href="javascript:void(0);" onclick="copyToClipboard('http://magazine-webcast.gl.joinmc.link')">magazine-webcast.gl.joinmc.link</a></p>
         </div>
     </div>
 
