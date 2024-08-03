@@ -3,46 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magic Craft SMP launch</title>
+    <title>Magic Craft SMP Launch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
             text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
             color: #333;
         }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #444;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
         p {
-            color: #666;
+            font-size: 1.2em;
+            color: #777;
+            margin-bottom: 30px;
         }
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 25px;
+            font-size: 18px;
             color: #fff;
-            background-color: #007bff;
+            background: linear-gradient(90deg, #007bff, #00c6ff);
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(90deg, #0056b3, #00aaff);
+            transform: scale(1.05);
+        }
+        .button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to the Eaglercraft Fan Page!</h1>
-        <p>click launch to launch eagler</p>
-        <a href="client.html" class="button">launch</a>
+        <p>Click the button below to launch Eaglercraft</p>
+        <a href="client.html" class="button">Launch</a>
     </div>
 </body>
 </html>
