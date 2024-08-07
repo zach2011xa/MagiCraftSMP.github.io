@@ -105,11 +105,10 @@
             };
 
             // Load and set the stored name if available
-            const userName = localStorage.getItem('chatName') || '';
+            let userName = localStorage.getItem('chatName') || '';
 
             if (userName) {
                 showChat();
-                nameInput.value = userName;
             } else {
                 nameContainer.style.display = 'flex';
             }
@@ -117,7 +116,8 @@
             startButton.addEventListener('click', () => {
                 const name = nameInput.value.trim();
                 if (name) {
-                    localStorage.setItem('chatName', name);
+                    userName = name;
+                    localStorage.setItem('chatName', userName);
                     showChat();
                 } else {
                     alert('Please enter a name.');
