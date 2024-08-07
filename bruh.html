@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat Room</title>
+    <title>Chat Room</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,20 +15,24 @@
             background-color: #f0f0f0;
         }
 
-        .chat-container {
+        .container {
             width: 400px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background: white;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
-        .chat-header {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-            display: flex;
-            align-items: center;
+        .name-container, .chat-container {
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .name-container {
+            text-align: center;
         }
 
         .chat-box {
@@ -43,15 +47,14 @@
             margin: 5px 0;
         }
 
-        #nameInput {
-            border: none;
+        #nameInput, #messageInput {
+            border: 1px solid #ccc;
             padding: 10px;
-            width: 70%;
+            width: calc(100% - 20px);
             box-sizing: border-box;
         }
 
-        #nameButton {
-            width: 30%;
+        #startButton, #sendButton {
             border: none;
             padding: 10px;
             background-color: #007BFF;
@@ -59,52 +62,67 @@
             cursor: pointer;
         }
 
-        #nameButton:hover {
+        #startButton:hover, #sendButton:hover {
             background-color: #0056b3;
         }
 
-        #messageInput {
-            border: none;
-            padding: 10px;
-            width: calc(100% - 80px);
-            box-sizing: border-box;
+        #startButton {
+            width: 100%;
         }
 
         #sendButton {
             width: 80px;
-            border: none;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-        }
-
-        #sendButton:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <input type="text" id="nameInput" placeholder="Enter your name...">
-            <button id="nameButton">Set Name</button>
+    <div class="container">
+        <div class="name-container" id="nameContainer">
+            <h1>Enter Your Name</h1>
+            <input type="text" id="nameInput" placeholder="Your name...">
+            <button id="startButton">Start Chat</button>
         </div>
-        <div class="chat-box" id="chatBox"></div>
-        <input type="text" id="messageInput" placeholder="Type a message...">
-        <button id="sendButton">Send</button>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-box" id="chatBox"></div>
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button id="sendButton">Send</button>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const nameContainer = document.getElementById('nameContainer');
+            const chatContainer = document.getElementById('chatContainer');
+            const nameInput = document.getElementById('nameInput');
+            const startButton = document.getElementById('startButton');
             const chatBox = document.getElementById('chatBox');
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
-            const nameInput = document.getElementById('nameInput');
-            const nameButton = document.getElementById('nameButton');
+
+            // Function to show chat container and hide name container
+            const showChat = () => {
+                nameContainer.style.display = 'none';
+                chatContainer.style.display = 'flex';
+            };
 
             // Load and set the stored name if available
-            let userName = localStorage.getItem('chatName') || 'Anonymous';
-            nameInput.value = userName;
+            const userName = localStorage.getItem('chatName') || '';
+
+            if (userName) {
+                showChat();
+                nameInput.value = userName;
+            } else {
+                nameContainer.style.display = 'flex';
+            }
+
+            startButton.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name) {
+                    localStorage.setItem('chatName', name);
+                    showChat();
+                } else {
+                    alert('Please enter a name.');
+                }
+            });
 
             const addMessage = (message) => {
                 const messageElement = document.createElement('div');
@@ -112,11 +130,6 @@
                 messageElement.textContent = message;
                 chatBox.appendChild(messageElement);
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
-            };
-
-            const setName = () => {
-                userName = nameInput.value.trim() || 'Anonymous';
-                localStorage.setItem('chatName', userName);
             };
 
             sendButton.addEventListener('click', () => {
@@ -127,10 +140,6 @@
                 }
             });
 
-            nameButton.addEventListener('click', () => {
-                setName();
-            });
-
             // Optional: Send message when pressing Enter key
             messageInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
@@ -138,12 +147,10 @@
                 }
             });
 
-            // Update name on enter key press
-            nameInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    setName();
-                }
-            });
+            // Update chat interface if name is already set
+            if (userName) {
+                addMessage(`${userName} has joined the chat.`);
+            }
         });
     </script>
 </body>
