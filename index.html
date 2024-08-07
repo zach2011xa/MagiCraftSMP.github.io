@@ -10,42 +10,46 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
+            background: linear-gradient(135deg, #f7f9fc, #e1e8ed);
             color: #333;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            align-items: center;
+            justify-content: center;
         }
         .container {
-            max-width: 800px;
-            margin: 100px auto;
+            max-width: 900px;
+            width: 100%;
             padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-top: 50px;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin-bottom: 20px;
             color: #444;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         p {
-            font-size: 1.2em;
-            color: #777;
+            font-size: 1.1em;
+            color: #666;
             margin-bottom: 30px;
         }
         .button {
             display: inline-block;
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 15px 30px;
+            font-size: 16px;
             color: #fff;
             background: linear-gradient(90deg, #007bff, #00c6ff);
             text-decoration: none;
             border-radius: 8px;
             transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin: 10px;
         }
         .button:hover {
             background: linear-gradient(90deg, #0056b3, #00aaff);
@@ -65,10 +69,10 @@
         footer {
             background: #333;
             color: #fff;
-            padding: 15px;
+            padding: 20px;
             font-size: 0.9em;
             text-align: center;
-            margin-top: auto;
+            width: 100%;
         }
         footer a {
             color: #00c6ff;
@@ -91,10 +95,10 @@
 <body>
     <div class="container">
         <h1>Welcome to Magic Craft SMP Launcher</h1>
-        <p>Click the button below to launch Eaglercraft</p>
-        <a href="normal/client.html" class="button">Launch normal 1.8.8</a>
-        <a href="client/client.html" class="button">Launch resent 4.0</a>
-        <a href="https://discord.gg/72HSWF4kPE" class="button">Discord</a>
+        <p>Click the buttons below to launch the game or join our community.</p>
+        <a href="normal/client.html" class="button">Launch Normal 1.8.8</a>
+        <a href="client/client.html" class="button">Launch Resent 4.0</a>
+        <a href="https://discord.gg/72HSWF4kPE" class="button">Join Discord</a>
 
         <div class="info">
             <h2>Server IP Addresses</h2>
@@ -102,11 +106,10 @@
             <p><strong>Java IP:</strong> <a href="javascript:void(0);" onclick="copyToClipboard('mc.magicraftsmp.cloud')">mc.magicraftsmp.cloud</a></p>
             <p><strong>Discord Server:</strong> <a href="javascript:void(0);" onclick="copyToClipboard('https://discord.gg/72HSWF4kPE')">The Discord Server</a></p>
         </div>
-        </div>
     </div>
 
     <footer>
-        <p>&copy; 2019-2024 Magic Craft SMP. All rights reserved. </p>
+        <p>&copy; 2019-2024 Magic Craft SMP. All rights reserved. <br><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
 </body>
 </html>
