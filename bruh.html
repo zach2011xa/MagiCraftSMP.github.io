@@ -102,6 +102,7 @@
             const showChat = () => {
                 nameContainer.style.display = 'none';
                 chatContainer.style.display = 'flex';
+                loadMessages();
             };
 
             // Load and set the stored name if available
@@ -124,6 +125,11 @@
                 }
             });
 
+            const loadMessages = () => {
+                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+                messages.forEach(message => addMessage(message));
+            };
+
             const addMessage = (message) => {
                 const messageElement = document.createElement('div');
                 messageElement.classList.add('chat-message');
@@ -132,10 +138,18 @@
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
             };
 
+            const saveMessage = (message) => {
+                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+                messages.push(message);
+                localStorage.setItem('chatMessages', JSON.stringify(messages));
+            };
+
             sendButton.addEventListener('click', () => {
                 const message = messageInput.value.trim();
                 if (message) {
-                    addMessage(`${userName}: ${message}`);
+                    const fullMessage = `${userName}: ${message}`;
+                    addMessage(fullMessage);
+                    saveMessage(fullMessage);
                     messageInput.value = '';
                 }
             });
