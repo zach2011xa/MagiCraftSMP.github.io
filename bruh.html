@@ -24,6 +24,13 @@
             flex-direction: column;
         }
 
+        .chat-header {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+        }
+
         .chat-box {
             flex: 1;
             padding: 10px;
@@ -34,6 +41,26 @@
 
         .chat-message {
             margin: 5px 0;
+        }
+
+        #nameInput {
+            border: none;
+            padding: 10px;
+            width: 70%;
+            box-sizing: border-box;
+        }
+
+        #nameButton {
+            width: 30%;
+            border: none;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        #nameButton:hover {
+            background-color: #0056b3;
         }
 
         #messageInput {
@@ -59,6 +86,10 @@
 </head>
 <body>
     <div class="chat-container">
+        <div class="chat-header">
+            <input type="text" id="nameInput" placeholder="Enter your name...">
+            <button id="nameButton">Set Name</button>
+        </div>
         <div class="chat-box" id="chatBox"></div>
         <input type="text" id="messageInput" placeholder="Type a message...">
         <button id="sendButton">Send</button>
@@ -68,6 +99,12 @@
             const chatBox = document.getElementById('chatBox');
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
+            const nameInput = document.getElementById('nameInput');
+            const nameButton = document.getElementById('nameButton');
+
+            // Load and set the stored name if available
+            let userName = localStorage.getItem('chatName') || 'Anonymous';
+            nameInput.value = userName;
 
             const addMessage = (message) => {
                 const messageElement = document.createElement('div');
@@ -77,18 +114,34 @@
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
             };
 
+            const setName = () => {
+                userName = nameInput.value.trim() || 'Anonymous';
+                localStorage.setItem('chatName', userName);
+            };
+
             sendButton.addEventListener('click', () => {
                 const message = messageInput.value.trim();
                 if (message) {
-                    addMessage(`You: ${message}`);
+                    addMessage(`${userName}: ${message}`);
                     messageInput.value = '';
                 }
+            });
+
+            nameButton.addEventListener('click', () => {
+                setName();
             });
 
             // Optional: Send message when pressing Enter key
             messageInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     sendButton.click();
+                }
+            });
+
+            // Update name on enter key press
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    setName();
                 }
             });
         });
