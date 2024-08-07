@@ -88,7 +88,25 @@
             <button id="sendButton">Send</button>
         </div>
     </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
     <script>
+        // Firebase configuration (replace with your own config)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
         document.addEventListener('DOMContentLoaded', () => {
             const nameContainer = document.getElementById('nameContainer');
             const chatContainer = document.getElementById('chatContainer');
@@ -126,8 +144,10 @@
             });
 
             const loadMessages = () => {
-                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-                messages.forEach(message => addMessage(message));
+                database.ref('messages').on('child_added', (snapshot) => {
+                    const message = snapshot.val();
+                    addMessage(message);
+                });
             };
 
             const addMessage = (message) => {
@@ -139,9 +159,7 @@
             };
 
             const saveMessage = (message) => {
-                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-                messages.push(message);
-                localStorage.setItem('chatMessages', JSON.stringify(messages));
+                database.ref('messages').push(message);
             };
 
             sendButton.addEventListener('click', () => {
